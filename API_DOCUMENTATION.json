@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+		"name": "Registro Retrospectivas API",
+		"description": "Colección de API para el servicio de Registro de Retrospectivas Ágiles.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "Sprints (Retrospectivas)",
+			"description": "Operaciones relacionadas con los Sprints o Retrospectivas.",
+			"item": [
+				{
+					"name": "Obtener todos los Sprints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sprints",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear un nuevo Sprint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Sprint Gamma\",\n    \"fecha_inicio\": \"2025-07-01\",\n    \"fecha_fin\": \"2025-07-14\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sprints",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un Sprint específico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/sprints/:sprintId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sprints",
+								":sprintId"
+							],
+							"variable": [
+								{
+									"key": "sprintId",
+									"value": "1",
+									"description": "ID del Sprint a obtener"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items de Retrospectiva",
+			"description": "Operaciones relacionadas con los ítems dentro de una Retrospectiva.",
+			"item": [
+				{
+					"name": "Agregar Ítem a un Sprint",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"categoria\": \"accion\",\n    \"descripcion\": \"Revisar documentación de la API\",\n    \"cumplida\": false,\n    \"fecha_revision\": \"2025-07-10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/sprints/:sprintId/items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"sprints",
+								":sprintId",
+								"items"
+							],
+							"variable": [
+								{
+									"key": "sprintId",
+									"value": "1",
+									"description": "ID del Sprint al que se agregará el ítem"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un Ítem (Marcar Acción como Cumplida)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cumplida\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "1",
+									"description": "ID del Ítem (acción) a actualizar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un Ítem",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/items/:itemId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "1",
+									"description": "ID del Ítem a eliminar"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://127.0.0.1:8000",
+			"type": "string",
+			"description": "URL base de la API de Registro de Retrospectivas"
+		}
+	]
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Retrospectivas Ágiles</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestor de Retrospectivas Ágiles</h1>
+        <p>Realiza un seguimiento sencillo y efectivo de tus sprints y retrospectivas.</p>
+
+        <div class="menu-botones">
+            <button class="btn btn-success" onclick="mostrarVista('inicio')">Inicio</button>
+            <button class="btn btn-primary" onclick="mostrarVista('nuevaRetrospectiva')">Nueva Retrospectiva</button>
+            <button class="btn btn-info" onclick="mostrarVista('agregarItem')">Añadir Ítem</button>
+            <button class="btn btn-secondary" onclick="mostrarVista('historial')">Historial</button>
+            </div>
+
+        <div id="inicio" class="vista">
+            <h2>Bienvenido</h2>
+            <p>Utiliza el menú superior para navegar por la aplicación. Puedes crear nuevas retrospectivas (sprints), añadir ítems a sprints existentes, o consultar el historial.</p>
+        </div>
+
+        <div id="nuevaRetrospectiva" class="vista" style="display: none;">
+            <h2>Crear Nueva Retrospectiva (Sprint)</h2>
+            <form id="form-nueva-retrospectiva">
+                <label for="sprint-nombre">Nombre del Sprint</label>
+                <input type="text" id="sprint-nombre" name="nombre" placeholder="Ejemplo: Sprint de Diseño UI" required>
+
+                <label for="sprint-fecha-inicio">Fecha de Inicio</label>
+                <input type="date" id="sprint-fecha-inicio" name="fecha_inicio" required>
+
+                <label for="sprint-fecha-fin">Fecha de Fin</label>
+                <input type="date" id="sprint-fecha-fin" name="fecha_fin" required>
+
+                <button type="submit" class="btn btn-primary">Guardar Sprint</button>
+            </form>
+        </div>
+
+        <div id="agregarItem" class="vista" style="display: none;">
+            <h2>Añadir Ítem a Retrospectiva</h2>
+            <form id="form-agregar-item">
+                <label for="item-sprint-id">Selecciona el Sprint</label>
+                <select id="item-sprint-id" name="sprint_id" required>
+                    <option value="">-- Cargando Sprints... --</option>
+                    </select>
+
+                <label for="item-categoria">Categoría</label>
+                <select id="item-categoria" name="categoria" required>
+                    <option value="">-- Selecciona Categoría --</option>
+                    <option value="logro">Logro (Qué funcionó bien)</option>
+                    <option value="impedimento">Impedimento (Qué necesita mejorar)</option>
+                    <option value="accion">Acción (Compromisos para el próximo sprint)</option>
+                    <option value="comentario">Comentario General</option>
+                    <option value="otro">Otro</option>
+                </select>
+
+                <div id="item-campos-descripcion" style="display: none;">
+                    <label for="item-descripcion">Descripción</label>
+                    <textarea id="item-descripcion" name="descripcion" rows="4" placeholder="Detalla el ítem aquí..." required></textarea>
+                </div>
+
+                <div id="item-campos-accion" style="display: none;"> <label for="item-cumplida">
+                        <input type="checkbox" id="item-cumplida" name="cumplida" value="true">
+                        <span></span> ¿Acción Cumplida? (Dejar desmarcado para nuevas acciones)
+                    </label>
+
+                    <label for="item-fecha-revision">Fecha de Revisión (Opcional)</label>
+                    <input type="date" id="item-fecha-revision" name="fecha_revision">
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-guardar-item" style="display:none;">Guardar Ítem</option>
+            </form>
+        </div>
+
+        <div id="historial" class="vista" style="display: none;">
+            <h2>Historial de Retrospectivas</h2>
+            <div id="lista-historial-sprints">
+                <p class="loading-state">Cargando historial...</p>
+                </div>
+        </div>
+
+         <div id="reporte" class="vista" style="display: none;">
+            <h2>Reporte General</h2>
+            <div id="contenido-reporte">
+                <p class="loading-state">Generando reporte...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/datos.js" defer></script>
+</body>
+</html>
