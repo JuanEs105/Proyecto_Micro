@@ -3,91 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor de Retrospectivas Ágiles</title>
+    <title>Gestor de Retrospectivas Ágiles v2.2</title>
     <link rel="stylesheet" href="css/index.css">
-</head>
+    </head>
 <body>
-    <div class="container">
-        <h1>Gestor de Retrospectivas Ágiles</h1>
-        <p>Realiza un seguimiento sencillo y efectivo de tus sprints y retrospectivas.</p>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Retrospectivas Ágiles</h1>
+            <nav class="app-nav">
+                <button class="btn nav-btn btn-dashboard" onclick="mostrarVista('dashboard-vista')">Dashboard</button>
+                <button class="btn nav-btn btn-primary" onclick="mostrarVista('nuevaRetrospectiva-vista')">Nuevo Sprint</button>
+                <button class="btn nav-btn btn-info btn-sm" id="btn-ver-actividad-sesion">Actividad Sesión</button>
+            </nav>
+        </header>
 
-        <div class="menu-botones">
-            <button class="btn btn-success" onclick="mostrarVista('inicio')">Inicio</button>
-            <button class="btn btn-primary" onclick="mostrarVista('nuevaRetrospectiva')">Nueva Retrospectiva</button>
-            <button class="btn btn-info" onclick="mostrarVista('agregarItem')">Añadir Ítem</button>
-            <button class="btn btn-secondary" onclick="mostrarVista('historial')">Historial</button>
+        <main class="app-main">
+            <div id="dashboard-vista" class="vista">
+                <h2>Dashboard de Sprints</h2>
+                <div id="sprints-grid-container">
+                    <p class="loading-state">Cargando sprints...</p>
+                </div>
             </div>
 
-        <div id="inicio" class="vista">
-            <h2>Bienvenido</h2>
-            <p>Utiliza el menú superior para navegar por la aplicación. Puedes crear nuevas retrospectivas (sprints), añadir ítems a sprints existentes, o consultar el historial.</p>
-        </div>
+            <div id="nuevaRetrospectiva-vista" class="vista" style="display: none;">
+                <h2>Crear Nuevo Sprint (Retrospectiva)</h2>
+                <form id="form-nueva-sprint">
+                    <label for="sprint-nombre">Nombre del Sprint</label>
+                    <input type="text" id="sprint-nombre" name="nombre" placeholder="Ej. Sprint Alfa v1.1" required>
+                    <label for="sprint-fecha-inicio">Fecha de Inicio</label>
+                    <input type="date" id="sprint-fecha-inicio" name="fecha_inicio" required>
+                    <label for="sprint-fecha-fin">Fecha de Fin</label>
+                    <input type="date" id="sprint-fecha-fin" name="fecha_fin" required>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Crear Sprint</button>
+                        <button type="button" class="btn btn-secondary" onclick="mostrarVista('dashboard-vista')">Cancelar</button>
+                    </div>
+                </form>
+            </div>
 
-        <div id="nuevaRetrospectiva" class="vista" style="display: none;">
-            <h2>Crear Nueva Retrospectiva (Sprint)</h2>
-            <form id="form-nueva-retrospectiva">
-                <label for="sprint-nombre">Nombre del Sprint</label>
-                <input type="text" id="sprint-nombre" name="nombre" placeholder="Ejemplo: Sprint de Diseño UI" required>
+            <div id="sprint-board-vista" class="vista" style="display: none;">
+                <div class="board-header">
+                    <div> <h2 id="board-sprint-name" style="margin-bottom: 5px;">Nombre del Sprint</h2>
+                        <p id="board-sprint-dates" class="sprint-meta"></p>
+                    </div>
+                    <div class="board-actions"> <button class="btn btn-success" id="btn-open-add-item-modal"><i class="fas fa-plus"></i> Añadir Ítem</button>
+                        <button class="btn btn-secondary" onclick="mostrarVista('dashboard-vista')">Volver al Dashboard</button>
+                    </div>
+                </div>
+                <div class="retro-board">
+                    <div class="retro-column" id="columna-logro">
+                        <h3>✅ Logros (Qué funcionó bien)</h3>
+                        <div class="items-container" data-categoria="logro"></div>
+                    </div>
+                    <div class="retro-column" id="columna-impedimento">
+                        <h3>⚠️ Impedimentos (Qué necesita mejorar)</h3>
+                        <div class="items-container" data-categoria="impedimento"></div>
+                    </div>
+                    <div class="retro-column" id="columna-accion">
+                        <h3>🎯 Acciones (Compromisos)</h3>
+                        <div class="items-container" data-categoria="accion"></div>
+                    </div>
+                    </div>
+            </div>
+        </main>
+    </div>
 
-                <label for="sprint-fecha-inicio">Fecha de Inicio</label>
-                <input type="date" id="sprint-fecha-inicio" name="fecha_inicio" required>
-
-                <label for="sprint-fecha-fin">Fecha de Fin</label>
-                <input type="date" id="sprint-fecha-fin" name="fecha_fin" required>
-
-                <button type="submit" class="btn btn-primary">Guardar Sprint</button>
-            </form>
-        </div>
-
-        <div id="agregarItem" class="vista" style="display: none;">
-            <h2>Añadir Ítem a Retrospectiva</h2>
-            <form id="form-agregar-item">
-                <label for="item-sprint-id">Selecciona el Sprint</label>
-                <select id="item-sprint-id" name="sprint_id" required>
-                    <option value="">-- Cargando Sprints... --</option>
-                    </select>
-
-                <label for="item-categoria">Categoría</label>
-                <select id="item-categoria" name="categoria" required>
-                    <option value="">-- Selecciona Categoría --</option>
-                    <option value="logro">Logro (Qué funcionó bien)</option>
-                    <option value="impedimento">Impedimento (Qué necesita mejorar)</option>
-                    <option value="accion">Acción (Compromisos para el próximo sprint)</option>
-                    <option value="comentario">Comentario General</option>
+    <div id="addItemModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="cerrarModal('addItemModal')">&times;</span>
+            <h2>Añadir Nuevo Ítem</h2>
+            <form id="form-add-item">
+                <input type="hidden" id="add-item-sprint-id">
+                <label for="add-item-categoria">Categoría</label>
+                <select id="add-item-categoria" name="categoria" required>
+                    <option value="logro">Logro</option>
+                    <option value="impedimento">Impedimento</option>
+                    <option value="accion">Acción</option>
+                    <option value="comentario">Comentario</option>
                     <option value="otro">Otro</option>
                 </select>
-
-                <div id="item-campos-descripcion" style="display: none;">
-                    <label for="item-descripcion">Descripción</label>
-                    <textarea id="item-descripcion" name="descripcion" rows="4" placeholder="Detalla el ítem aquí..." required></textarea>
-                </div>
-
-                <div id="item-campos-accion" style="display: none;"> <label for="item-cumplida">
-                        <input type="checkbox" id="item-cumplida" name="cumplida" value="true">
-                        <span></span> ¿Acción Cumplida? (Dejar desmarcado para nuevas acciones)
+                <label for="add-item-descripcion">Descripción</label>
+                <textarea id="add-item-descripcion" name="descripcion" rows="4" required placeholder="Describe el punto aquí..."></textarea>
+                <div id="add-item-campos-accion" class="accion-specific-fields" style="display:none;">
+                    <label for="add-item-cumplida">
+                        <input type="checkbox" id="add-item-cumplida" name="cumplida"><span></span> Cumplida
                     </label>
-
-                    <label for="item-fecha-revision">Fecha de Revisión (Opcional)</label>
-                    <input type="date" id="item-fecha-revision" name="fecha_revision">
+                    <label for="add-item-fecha-revision">Fecha de Revisión (Opcional)</label>
+                    <input type="date" id="add-item-fecha-revision" name="fecha_revision">
                 </div>
-                <button type="submit" class="btn btn-primary" id="btn-guardar-item" style="display:none;">Guardar Ítem</option>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Guardar Ítem</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal('addItemModal')">Cancelar</button>
+                </div>
             </form>
         </div>
+    </div>
 
-        <div id="historial" class="vista" style="display: none;">
-            <h2>Historial de Retrospectivas</h2>
-            <div id="lista-historial-sprints">
-                <p class="loading-state">Cargando historial...</p>
+    <div id="editItemModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="cerrarModal('editItemModal')">&times;</span>
+            <h2>Editar Ítem</h2>
+            <form id="form-edit-item">
+                <input type="hidden" id="edit-item-id">
+                <input type="hidden" id="edit-item-sprint-id-context">
+                <label for="edit-item-categoria">Categoría</label>
+                <select id="edit-item-categoria" name="categoria" required>
+                    <option value="logro">Logro</option>
+                    <option value="impedimento">Impedimento</option>
+                    <option value="accion">Acción</option>
+                    <option value="comentario">Comentario</option>
+                    <option value="otro">Otro</option>
+                </select>
+                <label for="edit-item-descripcion">Descripción</label>
+                <textarea id="edit-item-descripcion" name="descripcion" rows="4" required></textarea>
+                <div id="edit-item-campos-accion" class="accion-specific-fields" style="display:none;">
+                    <label for="edit-item-cumplida">
+                        <input type="checkbox" id="edit-item-cumplida" name="cumplida"><span></span> Cumplida
+                    </label>
+                    <label for="edit-item-fecha-revision">Fecha de Revisión (Opcional)</label>
+                    <input type="date" id="edit-item-fecha-revision" name="fecha_revision">
                 </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal('editItemModal')">Cancelar</button>
+                </div>
+            </form>
         </div>
+    </div>
 
-         <div id="reporte" class="vista" style="display: none;">
-            <h2>Reporte General</h2>
-            <div id="contenido-reporte">
-                <p class="loading-state">Generando reporte...</p>
+    <div id="actividadSesionModal" class="modal" style="display:none;">
+        <div class="modal-content modal-lg"> <span class="close-button" onclick="cerrarModal('actividadSesionModal')">&times;</span>
+            <h2>Actividad Reciente (Esta Sesión)</h2>
+            <div id="actividad-sesion-log-container" class="history-log-container">
+                <p class="empty-state">No hay actividad registrada en esta sesión aún.</p>
             </div>
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -1,240 +1,469 @@
+/* --- Reset Básico y Tema Claro Robusto --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background: #121212; /* Fondo oscuro principal */
-    color: #e0e0e0;     /* Color de texto principal */
+    background-color: #eef1f5; /* Un gris muy claro para el fondo general */
+    color: #333a45; /* Texto principal más oscuro para mayor contraste */
+    line-height: 1.6;
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    transition: background-color 0.3s ease;
 }
 
-.container {
-    padding: 30px 20px;
-    max-width: 800px;
-    margin: 40px auto;
-    background: #1f1f1f; /* Fondo del contenedor ligeramente más claro */
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3); /* Sombra azulada */
+.app-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #ffffff; /* Contenedor principal de la app en blanco */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); /* Sombra general sutil para la app */
 }
 
-h1 {
-    text-align: center;
-    color: #64b5f6; /* Azul claro para el título principal */
-    font-weight: 700;
-    font-size: 2.8rem;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 4px rgba(100, 181, 246, 0.6);
+.app-header {
+    background-color: #ffffff;
+    padding: 18px 30px; /* Un poco más de padding vertical */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Sombra más definida */
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-/* Subtítulo o párrafo debajo del H1 */
-.container > p {
-    text-align: center;
-    color: #bbbbbb;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-}
-
-h2 {
-    margin-top: 30px;
-    color: #e0e0e0; /* Color de texto para H2, más brillante que bbbbbb */
+.app-header h1 {
+    color: #2c5282; /* Azul corporativo oscuro */
+    font-size: 1.9rem; /* Ligeramente más grande */
+    margin: 0;
     font-weight: 600;
-    font-size: 1.8rem; /* Un poco más grande */
-    border-bottom: 2px solid #64b5f6; /* Línea inferior azul */
-    padding-bottom: 8px; /* Más espaciado */
-    margin-bottom: 20px; /* Espacio después del H2 */
 }
 
-.menu-botones {
-    text-align: center;
+.app-nav .btn {
+    margin-left: 12px;
+    padding: 9px 20px; /* Botones de navegación ligeramente más grandes */
+    font-size: 0.9rem;
+}
+
+.app-main {
+    padding: 30px; /* Más padding general */
+}
+
+/* --- Estilos Generales (H2, Botones, Forms) --- */
+h2 {
+    color: #3182ce; /* Azul más vibrante para H2 */
+    font-weight: 600;
+    font-size: 1.9rem; /* Consistente con el header H1 */
+    border-bottom: 2px solid #e2e8f0; /* Borde inferior más sutil */
+    padding-bottom: 12px;
+    margin-top: 0;
     margin-bottom: 30px;
 }
 
 .btn {
-    padding: 12px 25px; /* Ligeramente más padding horizontal */
-    margin: 8px; /* Un poco más de margen */
-    border: none;
-    border-radius: 25px; /* Botones redondeados */
-    color: #ffffff; /* Texto blanco para mejor contraste en botones de color */
+    padding: 11px 24px; /* Padding ajustado */
+    margin: 6px;
+    border: 1px solid transparent; /* Borde base para hover */
+    border-radius: 6px; /* Bordes menos redondeados, más "sólidos" */
+    color: #ffffff;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    user-select: none;
+    font-weight: 500; /* Ligeramente menos bold para un look más limpio */
+    font-size: 0.95rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
 }
-
 .btn:hover {
-    box-shadow: 0 6px 12px rgba(0,0,0,0.75);
-    transform: translateY(-2px); /* Efecto sutil al pasar el mouse */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+.btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
-/* Colores específicos para los botones */
-.btn-primary { background-color: #1976d2; } /* Azul primario */
-.btn-primary:hover { background-color: #1565c0; }
+/* Colores de botones revisados */
+.btn-primary { background-color: #3182ce; border-color: #3182ce; }
+.btn-primary:hover { background-color: #2b6cb0; border-color: #2b6cb0;}
 
-.btn-secondary { background-color: #546e7a; color: #eceff1; } /* Gris azulado */
-.btn-secondary:hover { background-color: #455a64; }
+.btn-secondary { background-color: #64748b; border-color: #64748b; color: #ffffff; }
+.btn-secondary:hover { background-color: #475569; border-color: #475569;}
 
-.btn-info { background-color: #0288d1; } /* Azul informativo */
-.btn-info:hover { background-color: #0277bd; }
+.btn-success { background-color: #38a169; border-color: #38a169; }
+.btn-success:hover { background-color: #2f855a; border-color: #2f855a;}
 
-.btn-success { background-color: #388e3c; } /* Verde éxito */
-.btn-success:hover { background-color: #2e7d32; }
+.btn-danger { background-color: #e53e3e; border-color: #e53e3e; }
+.btn-danger:hover { background-color: #c53030; border-color: #c53030;}
 
-.btn-danger { background-color: #d32f2f; } /* Rojo peligro */
-.btn-danger:hover { background-color: #c62828; }
+.btn-info { background-color: #319795; border-color: #319795; } /* Ya usado para actividad sesión */
+.btn-info:hover { background-color: #2c7a7b; border-color: #2c7a7b;}
 
-.btn-warning { background-color: #fbc02d; color: #212121; } /* Amarillo advertencia */
-.btn-warning:hover { background-color: #f9a825; }
+.btn-warning { background-color: #dd6b20; border-color: #dd6b20; color: #ffffff; }
+.btn-warning:hover { background-color: #c05621; border-color: #c05621;}
 
+.btn-dashboard { /* Estilo para el botón Dashboard morado */
+    background-color: #805ad5; /* Morado principal */
+    border-color: #805ad5;    /* Borde del mismo color */
+    color: #ffffff;           /* Texto blanco para buen contraste */
+}
+.btn-dashboard:hover {
+    background-color: #6b46c1; /* Morado un poco más oscuro para el hover */
+    border-color: #6b46c1;
+}
+
+.btn-sm { padding: 7px 14px; font-size: 0.8rem; border-radius: 4px;}
 
 label {
     display: block;
-    margin-top: 20px; /* Más espacio arriba */
-    margin-bottom: 8px; /* Espacio antes del input */
-    font-weight: 600;
-    color: #bbbbbb;
-    font-size: 0.95rem;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4a5568;
+    font-size: 0.9rem;
 }
-
-input[type="text"],
-input[type="date"],
+input,
 select,
 textarea {
-    width: calc(100% - 36px); /* Ajustar width para padding */
-    padding: 14px 16px;
-    margin-top: 8px;
-    border: 2px solid #444; /* Borde sutil */
-    border-radius: 10px;
-    font-size: 1rem;
-    background-color: #2c2c2c; /* Fondo oscuro para inputs */
-    color: #e0e0e0; /* Texto claro en inputs */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: #fdfdfe;
+    color: #2d3748;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     font-family: inherit;
-    box-sizing: border-box; /* Incluir padding y border en el width/height total */
+    box-sizing: border-box;
 }
 select {
-     width: 100%; /* Select al 100% */
-     appearance: none; /* Quitar estilo por defecto del select */
-     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23bbbbbb%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.4-5.4-13z%22%2F%3E%3C%2Fsvg%3E');
+     appearance: none;
+     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234A5568%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.4-5.4-13z%22%2F%3E%3C%2Fsvg%3E');
      background-repeat: no-repeat;
-     background-position: right 1rem center;
-     background-size: 0.8em;
-     padding-right: 2.5rem; /* Espacio para la flecha */
+     background-position: right 0.9rem center;
+     background-size: 0.7em;
+     padding-right: 2.5rem;
 }
-
-
-textarea {
-    resize: vertical;
-    min-height: 100px; /* Altura mínima para textareas */
-}
-
-input::placeholder, textarea::placeholder {
-    color: #777; /* Color del placeholder */
-}
-
+textarea { resize: vertical; min-height: 90px; }
 input:focus, select:focus, textarea:focus {
     outline: none;
-    border-color: #64b5f6; /* Borde azul al enfocar */
-    box-shadow: 0 0 8px rgba(100, 181, 246, 0.7); /* Sombra azul al enfocar */
-    background-color: #383838; /* Fondo ligeramente más claro al enfocar */
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.25);
 }
-
-.vista {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #2a2a2a; /* Fondo para las vistas individuales */
-    border-radius: 8px;
+::placeholder {
+    color: #a0aec0;
 }
-
-.card {
-    background-color: #252525; /* Fondo oscuro para las tarjetas */
-    border-radius: 15px;
-    padding: 20px 25px; /* Ajuste de padding */
-    margin-top: 20px; /* Espacio entre tarjetas */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra más sutil */
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    color: #ddd; /* Color de texto en tarjetas */
-}
-
-.card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7); /* Sombra más pronunciada al pasar el mouse */
-    transform: translateY(-3px); /* Ligero levantamiento */
-}
-
-.card h3 { /* Nombre del sprint en la tarjeta */
-    color: #64b5f6;
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.4rem;
-}
-.card p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 8px;
-}
-.card small { /* Para fechas o metadatos */
-    font-size: 0.85rem;
-    color: #888;
-}
-
-.retro-item-card { /* Estilo para cada ítem dentro de un sprint en el historial */
-    background-color: #333333;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 8px;
-    border-left: 5px solid; /* Se definirá el color por categoría en JS */
-}
-.retro-item-card h4 { /* Categoría del ítem */
-    margin-top: 0;
-    font-size: 1.1rem;
-    color: #c5cae9; /* Color lavanda claro */
-}
-.retro-item-card p {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-}
-.retro-item-card .item-actions {
-    margin-top: 10px;
+.form-actions {
+    margin-top: 25px;
     text-align: right;
 }
+.form-actions .btn { margin-left: 10px; }
 
-/* Checkbox personalizado (opcional, pero mejora el look dark) */
-label input[type="checkbox"] {
-    display: none; /* Ocultar el checkbox por defecto */
-}
-label input[type="checkbox"] + span { /* El span será nuestro checkbox visible */
+/* --- Checkbox Personalizado para Tema Claro --- */
+/* Aplicado a .accion-specific-fields y .modal-content */
+.accion-specific-fields label input[type="checkbox"],
+.modal-content label input[type="checkbox"] { display: none; }
+
+.accion-specific-fields label input[type="checkbox"] + span,
+.modal-content label input[type="checkbox"] + span {
     display: inline-block;
-    width: 18px;
-    height: 18px;
-    margin: -2px 10px 0 0;
+    width: 18px; height: 18px;
+    margin: -1px 8px 0 0;
     vertical-align: middle;
-    background: #444;
-    border: 1px solid #555;
-    border-radius: 3px;
-    cursor: pointer;
-    position: relative;
+    background-color: #edf2f7;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px; cursor: pointer; position: relative;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-label input[type="checkbox"]:checked + span {
-    background: #64b5f6; /* Azul cuando está chequeado */
-    border-color: #64b5f6;
+.accion-specific-fields label input[type="checkbox"]:checked + span,
+.modal-content label input[type="checkbox"]:checked + span {
+    background-color: #3182ce; /* Color primario para el check activo */
+    border-color: #3182ce;
 }
-label input[type="checkbox"]:checked + span:after { /* La marca de verificación */
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
+.accion-specific-fields label input[type="checkbox"]:checked + span:after,
+.modal-content label input[type="checkbox"]:checked + span:after {
+    content: ''; position: absolute;
+    left: 6px; top: 2px; width: 5px; height: 10px;
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
 
-/* Para el mensaje de "cargando" o "no hay elementos" */
-.empty-state, .loading-state {
-    color: #888;
-    text-align: center;
-    padding: 20px;
+
+/* --- Estilos de Vistas --- */
+.vista {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
+}
+
+/* --- Dashboard (Lista de Sprints) --- */
+#sprints-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+.sprint-card-dashboard {
+    background-color: #fdfdfe;
+    padding: 20px 25px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: #2d3748;
+}
+.sprint-card-dashboard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.sprint-card-dashboard h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.35rem;
+    color: #2c5282;
+}
+.sprint-card-dashboard p {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: #4a5568;
+}
+
+/* --- Vista de Tablero del Sprint --- */
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+}
+.board-header #board-sprint-name {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    color: #2c5282;
+}
+.board-header .sprint-meta {
+    color: #718096;
+    font-size: 0.9rem;
+}
+.board-header .board-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+.retro-board {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    padding: 10px 2px 15px 2px;
+}
+
+.retro-column {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 15px 20px;
+    min-width: 320px;
+    flex: 1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+}
+.retro-column h3 {
+    font-size: 1.25rem;
+    color: #4a5568;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.items-container {
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-grow: 1;
+}
+
+.retro-item-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    color: #2d3748;
+    border-left: 5px solid; /* Borde izquierdo más grueso */
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.retro-item-card:hover {
+    box-shadow: 0 3px 7px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+/* Colores de borde por categoría (usando data-attributes) */
+.retro-item-card[data-category="logro"] { border-left-color: #38a169; } /* Verde */
+.retro-item-card[data-category="impedimento"] { border-left-color: #e53e3e; } /* Rojo */
+.retro-item-card[data-category="accion"] { border-left-color: #3182ce; } /* Azul */
+.retro-item-card[data-category="comentario"] { border-left-color: #64748b; } /* Gris */
+.retro-item-card[data-category="otro"] { border-left-color: #dd6b20; } /* Naranja */
+
+
+.retro-item-card .item-description {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #2d3748;
+}
+.retro-item-card .item-meta {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.retro-item-card .item-meta input + span {
+    width: 16px; height: 16px; margin-right: 6px;
+    background-color: #edf2f7; border-color: #cbd5e0;
+}
+.retro-item-card .item-meta input:checked + span {
+    background-color: #38a169; border-color: #38a169;
+}
+.retro-item-card .item-meta input:checked + span:after {
+    border-color: #ffffff;
+}
+
+
+.item-actions-toolbar {
+    margin-top: 12px;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.item-actions-toolbar .btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+
+/* --- Modal Styles (Adaptados a tema claro robusto) --- */
+.modal {
+    display: none; position: fixed; z-index: 1000;
+    left: 0; top: 0; width: 100%; height: 100%;
+    overflow: auto; background-color: rgba(45, 55, 72, 0.65);
+    transition: opacity 0.25s ease-in-out;
+}
+.modal-content {
+    background-color: #ffffff;
+    margin: 7% auto;
+    padding: 25px 30px;
+    border: none;
+    border-radius: 8px;
+    width: 90%; max-width: 580px;
+    color: #2d3748;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    position: relative;
+    animation: fadeInModal 0.3s ease-out;
+}
+@keyframes fadeInModal {
+    from { opacity: 0; transform: translateY(-20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.close-button {
+    color: #a0aec0;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute; top: 12px; right: 18px;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.close-button:hover, .close-button:focus {
+    color: #e53e3e;
+    transform: scale(1.1);
+    text-decoration: none; cursor: pointer;
+}
+.modal-content h2 {
+    margin-top: 0; color: #3182ce; font-size: 1.7rem;
+    border-bottom-color: #e2e8f0; margin-bottom: 25px;
+}
+.modal-content .form-actions { margin-top: 30px; }
+
+/* Estilos para el modal de historial de actividad (y modal de historial de sprint si lo usas) */
+.modal-content.modal-lg { /* Para modales más anchos */
+    max-width: 750px;
+}
+.history-log-container {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 10px 15px;
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+.history-entry {
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border-left: 4px solid #cbd5e0; /* Borde por defecto, puede ser sobreescrito por JS para tipos de acción */
+    border-radius: 4px;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.history-entry .timestamp {
+    font-size: 0.75rem;
+    color: #718096;
+    display: block;
+    margin-bottom: 4px;
+}
+.history-entry .action-type-label {
+    font-weight: bold;
+    display: inline-block; /* Ajustado para que no sea block si el detalle es corto */
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-bottom: 5px;
+    background-color: #e2e8f0;
+    color: #4a5568;
+}
+.history-entry .details {
+    margin-top: 4px;
+    font-size: 0.85rem;
+    color: #4a5568;
+    word-break: break-all;
+}
+/* Clases para colorear el borde izquierdo de las entradas del historial de cambios persistente (si se usa) */
+.history-entry.action-item-creado { border-left-color: #38a169; }
+.history-entry.action-item-actualizado { border-left-color: #dd6b20; }
+.history-entry.action-item-eliminado { border-left-color: #e53e3e; }
+
+.history-entry .item-context { /* Para la info del ítem en el historial persistente */
+    font-size: 0.8rem;
+    color: #718096;
     font-style: italic;
+    margin-top: 3px;
+}
+
+
+/* --- Estados de Carga y Vacío --- */
+.loading-state, .empty-state, .empty-state-column {
+    color: #718096;
+    text-align: center;
+    padding: 30px;
+    font-style: italic;
+    font-size: 1rem;
+}
+.empty-state-column {
+    padding: 20px 0;
+}
+
+/* Iconos (si los usas con Font Awesome, asegúrate que hereden color o tengan buen contraste) */
+.fas {
+    margin-right: 6px;
 }
